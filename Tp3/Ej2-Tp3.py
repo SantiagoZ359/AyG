@@ -103,9 +103,10 @@ def transition_process(string):
                 print("ERROR")
                 state=0
                 return
-
-
-    print("Estado de aceptacion alcanzado:", state)
+    if state == 0 or state == 1 or state == 2:
+        print("Estado de aceptacion no alcanzado.",state)
+    else:
+        print("Estado de aceptacion alcanzado:", state)
 
 if __name__ == '__main__':
     main()
