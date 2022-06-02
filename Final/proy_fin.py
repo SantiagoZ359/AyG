@@ -23,8 +23,8 @@ def main():
         Id_ses()
     elif input_1 == 'b':
         Inic_ses()
-    #elif input_1 == 'c':
-        #use_ipv4()
+    elif input_1 == 'c':
+        tiempo_total()
     #elif input_1 == 'd':
         #use_password()
     elif input_1 == 'x':
@@ -36,6 +36,7 @@ def main():
 #reemplazo los valores vacios por 0
 #df.dropna(0)
 
+#1
 #Filtro por la categoria usuario
 def Id_ses():
     
@@ -72,6 +73,7 @@ def Id_ses():
         time.sleep(1)
         main()
 
+#2
 def Inic_ses():
     nomb_usuario = input("Ingrese el nombre del usuario a analizar: ")
     print("A continuacion, ingrese el rango de fecha")
@@ -108,15 +110,45 @@ def Inic_ses():
         time.sleep(1)
         main()
 
+#3
+def tiempo_total():
 
+    nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
+    if nomb_usuario in df.values:
+        sf2 = df.loc[: , ["Usuario","Session Time"]]
+        sf3 = sf2['Session Time'].sum()
+        
+        print("El total de segundos es",sf3)
+        #lo defino por hora minuto y segundo
+        horas = sf3 // 3600
+        sobrante = sf3%3600
+        minutos = sobrante//60
+        sobrante2 = sobrante%60
+        time.sleep(1)
+        print("HORAS:")
+        print(horas)
+        print("MINUTOS:")
+        print(minutos)
+        print("SEGUNDOS:")
+        print(sobrante2)
+        time.sleep(5)
+        print("Regresando al menu...")
+        time.sleep(1)
+        print(".")
+        time.sleep(1)
+        print("..")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        main()
+    else:
+        print("error, usuario no encontrado")
+        print("regresando al menu...")
+        time.sleep(1)
+        main()
 
 
 #csegeview
-#8/28/2019 10:06
-#9/13/2019 11:39
-
-
-
 
 if __name__ == '__main__':
     main()
