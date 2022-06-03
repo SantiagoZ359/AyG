@@ -30,6 +30,8 @@ def main():
         mac_busqueda()
     elif input_1 == 'e':
         mac()
+    elif input_1 == 'f':
+        Mac_conect_fecha()
     elif input_1 == 'x':
         print("Saliendo del sistema...")
         exit()
@@ -224,6 +226,45 @@ def mac():
         main()
 
 
+#6
+def Mac_conect_fecha():
+    print("A continuacion, ingrese el rango de fecha")
+    print("El formato debe ser MM/DD/AAAA HH:MM (mes/dia/año hora:minuto)")
+    time.sleep(2)
+    #solicito la primer fecha
+    fech1 = input("ingrese la fecha inicial: ")
+    #solicito la segunda fecha
+    fech2 = input("ingrese la fecha final: ")
+    #verifico la existencia de los datos y la concordancia en el rango
+    if fech1 in df.values and fech2 in df.values and fech1 < fech2:
+        #"elimino" las categorias innecesarias
+        sf2 = df.loc[: , ["Usuario","MAC AP","Inicio de Conexi¢n"]]
+        #busco el nombre del usuario
+        #busco entre las fechas especificas
+        sf3 = sf2.loc[df["Inicio de Conexi¢n"].between(fech1, fech2)]
+        #exporto csv
+        sf3.to_csv("users_conec_ap.csv")
+        
+        print("proceso realizado con exito, verificar archivo 'users_conec_ap.csv'")
+        print("Regresando al menu...")
+        time.sleep(1)
+        print(".")
+        time.sleep(1)
+        print("..")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        main()
+    else:
+        print("Error dato, incorrecto")
+        print("Volviendo al menu")
+        time.sleep(1)
+        main()
+
+
+
+#8/28/2019 10:06
+#8/28/2019 10:07
 #csegeview
 
 if __name__ == '__main__':
