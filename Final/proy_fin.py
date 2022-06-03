@@ -16,6 +16,7 @@ def main():
     d) Busqueda de una MAC
     e) Lista de MAC de un usuario
     f) Usuarios conectados a una AP en un rango de fecha
+    g) Trafico de subida y bajada de un usuario
     x) Salir
     ''')
     input_1 = input("Seleccione el dato a analizar: ")
@@ -32,6 +33,8 @@ def main():
         mac()
     elif input_1 == 'f':
         Mac_conect_fecha()
+    elif input_1 == 'g':
+        conex_tot()
     elif input_1 == 'x':
         print("Saliendo del sistema...")
         exit()
@@ -261,6 +264,36 @@ def Mac_conect_fecha():
         time.sleep(1)
         main()
 
+#7
+def conex_tot():
+    nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
+    if nomb_usuario in df.values:
+        sf1 = df.loc[: , ["Usuario","Input Octects","Output Octects"]]
+        sf2 = sf1[sf1["Usuario"].isin([nomb_usuario])]
+        sf3 = sf2['Input Octects'].sum()
+        MB1 = sf3 // 1048576
+        sf4 = sf2['Output Octects'].sum()
+        MB2 = sf4 // 1048576
+
+        print(MB1, "MB de bajada")
+        print(MB2, "MB de subida")
+        time.sleep(5)
+        
+        print("Regresando al menu...")
+        
+        time.sleep(1)
+        print(".")
+        time.sleep(1)
+        print("..")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        main()
+    else:
+        print("error, usuario no encontrado")
+        print("regresando al menu...")
+        time.sleep(1)
+        main()
 
 
 #8/28/2019 10:06
