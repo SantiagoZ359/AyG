@@ -14,8 +14,8 @@ def main():
     a) Lista de sesiones de usuario por ID
     b) Inicio de sesion de un user en una determinada fecha
     c) Tiempo total de la sesion de un usuario
-    d) Contraseña segura
-    e) Salir
+    d) Lista de MAC de un usuario
+    x) Salir
     ''')
     input_1 = input("Seleccione el dato a analizar: ")
     print("\n")
@@ -25,8 +25,8 @@ def main():
         Inic_ses()
     elif input_1 == 'c':
         tiempo_total()
-    #elif input_1 == 'd':
-        #use_password()
+    elif input_1 == 'd':
+        mac()
     elif input_1 == 'x':
         print("Saliendo del sistema...")
         exit()
@@ -37,7 +37,6 @@ def main():
 #df.dropna(0)
 
 #1
-#Filtro por la categoria usuario
 def Id_ses():
     
     #nombre del usuario
@@ -116,7 +115,9 @@ def tiempo_total():
     nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
     if nomb_usuario in df.values:
         sf2 = df.loc[: , ["Usuario","Session Time"]]
-        sf3 = sf2['Session Time'].sum()
+        sf1 = sf2[sf2["Usuario"].isin([nomb_usuario])]
+        #al pedir el total usamos .sum
+        sf3 = sf1['Session Time'].sum()
         
         print("El total de segundos es",sf3)
         #lo defino por hora minuto y segundo
@@ -131,8 +132,11 @@ def tiempo_total():
         print(minutos)
         print("SEGUNDOS:")
         print(sobrante2)
+        
         time.sleep(5)
+        
         print("Regresando al menu...")
+        
         time.sleep(1)
         print(".")
         time.sleep(1)
@@ -144,6 +148,41 @@ def tiempo_total():
     else:
         print("error, usuario no encontrado")
         print("regresando al menu...")
+        time.sleep(1)
+        main()
+
+#5
+def mac():
+    nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
+    
+    #corroboro que exista el nombre
+    if nomb_usuario in df.values:
+        #separo las categorias en ID y Usuario
+        #loc "elimina" categorias
+        sf2 = df.loc[: , ["MAC Cliente","Usuario"]]
+        #isin busca dentro de la categoria
+        #filtro las categorias por el nombre de usuario
+        sf3 = sf2[sf2["Usuario"].isin([nomb_usuario])]
+        #agrupo por tamaño, y creo una index
+        sf4 = sf3.groupby(['MAC Cliente']).size().reset_index(name ='Veces Utilizada')
+        #exporto como csv
+        sf4.to_csv("mac_usuario.csv")
+        print("Exito, archivo 'mac_usuario.csv' fue creado con exito")
+        time.sleep(1)
+        
+        print("regresando al menu")
+        
+        time.sleep(1)
+        print(".")
+        time.sleep(1)
+        print("..")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        main()
+    
+    else:
+        print("Nombre incorrecto, regresando al menu...")
         time.sleep(1)
         main()
 
