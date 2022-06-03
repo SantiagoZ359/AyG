@@ -1,4 +1,3 @@
-from httplib2 import ProxiesUnavailableError
 import pandas as pd
 import numpy as np
 import time 
@@ -14,7 +13,9 @@ def main():
     a) Lista de sesiones de usuario por ID
     b) Inicio de sesion de un user en una determinada fecha
     c) Tiempo total de la sesion de un usuario
-    d) Lista de MAC de un usuario
+    d) Busqueda de una MAC
+    e) Lista de MAC de un usuario
+    f) Usuarios conectados a una AP en un rango de fecha
     x) Salir
     ''')
     input_1 = input("Seleccione el dato a analizar: ")
@@ -26,6 +27,8 @@ def main():
     elif input_1 == 'c':
         tiempo_total()
     elif input_1 == 'd':
+        mac_busqueda()
+    elif input_1 == 'e':
         mac()
     elif input_1 == 'x':
         print("Saliendo del sistema...")
@@ -150,6 +153,40 @@ def tiempo_total():
         print("regresando al menu...")
         time.sleep(1)
         main()
+
+#4
+def mac_busqueda():
+    #Busco la mac del user
+    mac_usuario = input("Ingrese la direccion MAC a analizar: ")
+    #Verifico existencia
+    if mac_usuario in df.values:
+        #"elimino" categorias innecesarias
+        sf1 = df.loc[: , ["MAC Cliente","Usuario"]]
+        #Busco la Mac
+        sf2 = sf1[sf1["MAC Cliente"].isin([mac_usuario])]
+        #Agrupo por tamaño y cambio la cat, incluyo el nombre del usuario
+        sf3 = sf2.groupby(['MAC Cliente', 'Usuario']).size().reset_index(name='Veces Utilizada')
+        #Exporto como csv
+        sf3.to_csv("mac_busqueda.csv")
+        print("Exito, el archivo 'mac_busqueda' fue creado con exito")
+        time.sleep(1)
+        
+        print("regresando al menu")
+        
+        time.sleep(1)
+        print(".")
+        time.sleep(1)
+        print("..")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        main()
+
+    else:
+        print("Mac no identificada, regresando al menu...")
+        time.sleep(1)
+
+
 
 #5
 def mac():
