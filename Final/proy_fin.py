@@ -17,6 +17,7 @@ def main():
     e) Lista de MAC de un usuario
     f) Usuarios conectados a una AP en un rango de fecha o fecha especifica
     g) Trafico de subida y bajada de un usuario
+    h) Ordenamiento por trafico
     x) Salir
     ''')
     input_1 = input("Seleccione el dato a analizar: ")
@@ -35,6 +36,8 @@ def main():
         Mac_conect_fecha()
     elif input_1 == 'g':
         conex_tot()
+    elif input_1 == 'h':
+        total_traf()
     elif input_1 == 'x':
         print("Saliendo del sistema...")
         exit()
@@ -191,8 +194,6 @@ def mac_busqueda():
         print("Mac no identificada, regresando al menu...")
         time.sleep(1)
 
-
-
 #5
 def mac():
     nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
@@ -339,6 +340,22 @@ def conex_tot():
         time.sleep(1)
         main()
 
+
+#8
+def total_traf():
+    selec = input("Ingrese 1 para ordenar por bajada, ingrese 2 para ordenar por subida: ")
+    if selec == '1':
+        print("nashe")
+        sf1 = df.loc[: , ["MAC AP","Input Octects"]]
+        sf2 = sf1.groupby(['MAC AP','Input Octects']).size().reset_index(name="Veces utilizada")
+        #sf3 = sf2.groupby(['MAC AP',]).size()
+        sf2.to_csv("sort_bajada.csv")
+        #print(sf2)
+    elif selec == '2':
+        print("Nashe error")
+    else:
+        print("Intentelo de nuevo")
+        total_traf()
 
 #8/28/2019 10:06
 #8/28/2019 10:07
