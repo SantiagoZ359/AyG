@@ -345,14 +345,26 @@ def conex_tot():
 def total_traf():
     selec = input("Ingrese 1 para ordenar por bajada, ingrese 2 para ordenar por subida: ")
     if selec == '1':
-        print("nashe")
+        #definimos las columnas a utilizar
         sf1 = df.loc[: , ["MAC AP","Input Octects"]]
-        sf2 = sf1.groupby(['MAC AP','Input Octects']).size().reset_index(name="Veces utilizada")
-        #sf3 = sf2.groupby(['MAC AP',]).size()
-        sf2.to_csv("sort_bajada.csv")
-        #print(sf2)
+        #agrupo las macs sumando sus valores de octetos de bajada
+        sf2 = sf1.groupby('MAC AP').sum()
+        #ordeno de forma descendente
+        sf3 = sf2.sort_values(by = ['Input Octects'],ascending = False)
+        #exporto como csv
+        sf3.to_csv("sort_bajada.csv")
+        print("Proceso realizado con exito, verifique el archivo 'sort_bajada.csv'.")
+
     elif selec == '2':
-        print("Nashe error")
+        #definimos las columnas a utilizar
+        sf1 = df.loc[: , ["MAC AP","Output Octects"]]
+        #agrupo las macs sumando sus valores de octetos de bajada
+        sf2 = sf1.groupby('MAC AP').sum()
+        #ordeno de forma descendente
+        sf3 = sf2.sort_values(by = ['Output Octects'],ascending = False)
+        #exporto como csv
+        sf3.to_csv("sort_subida.csv")
+        print("Proceso realizado con exito, verifique el archivo 'sort_subida.csv'.")
     else:
         print("Intentelo de nuevo")
         total_traf()
