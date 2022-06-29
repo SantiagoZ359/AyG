@@ -65,23 +65,24 @@ def Id_ses():
         sf3.to_csv("sesiones.csv")
         
         print("Exito, archivo 'sessiones.csv' fue creado con exito")
-        time.sleep(1)
-        
-        print("regresando al menu")
         
         time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print("..")
-        time.sleep(1)
-        print("...")
-        time.sleep(1)
-        main()
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            Id_ses()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     
     else:
-        print("Nombre incorrecto, regresando al menu...")
+        print("Nombre incorrecto, intentelo nuevamente...")
         time.sleep(1)
-        main()
+        Id_ses()
 
 #2
 def Inic_ses():
@@ -105,20 +106,23 @@ def Inic_ses():
         sf4.to_csv("inicios_sesion.csv")
         
         print("proceso realizado con exito, verificar archivo 'inicios_sesion.csv")
-        print("Regresando al menu...")
         time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print("..")
-        time.sleep(1)
-        print("...")
-        time.sleep(1)
-        main()
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            Inic_ses()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     else:
         print("error dato incorrecto")
-        print("Volviendo al menu")
+        print("Intentelo nuevamente")
         time.sleep(1)
-        main()
+        Inic_ses()
 
 #3
 def tiempo_total():
@@ -144,18 +148,18 @@ def tiempo_total():
         print("SEGUNDOS:")
         print(sobrante2)
         
-        time.sleep(5)
-        
-        print("Regresando al menu...")
-        
         time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print("..")
-        time.sleep(1)
-        print("...")
-        time.sleep(1)
-        main()
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            tiempo_total()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     else:
         print("error, usuario no encontrado")
         print("regresando al menu...")
@@ -178,17 +182,17 @@ def mac_busqueda():
         sf3.to_csv("mac_busqueda.csv")
         print("Exito, el archivo 'mac_busqueda' fue creado con exito")
         time.sleep(1)
-        
-        print("regresando al menu")
-        
-        time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print("..")
-        time.sleep(1)
-        print("...")
-        time.sleep(1)
-        main()
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            mac_busqueda()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
 
     else:
         print("Mac no identificada, regresando al menu...")
@@ -196,6 +200,7 @@ def mac_busqueda():
 
 #5
 def mac():
+    #pido el nombre del usuario
     nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
     
     #corroboro que exista el nombre
@@ -212,17 +217,18 @@ def mac():
         sf4.to_csv("mac_usuario.csv")
         print("Exito, archivo 'mac_usuario.csv' fue creado con exito")
         time.sleep(1)
-        
-        print("regresando al menu")
-        
-        time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print("..")
-        time.sleep(1)
-        print("...")
-        time.sleep(1)
-        main()
+        #menu para continuar
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            mac()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     
     else:
         print("Nombre incorrecto, regresando al menu...")
@@ -247,7 +253,7 @@ def Mac_conect_fecha():
         #solicito la mac ap
         macap = input("Ingrese la mac ap a analizar: ")
         #verifico la existencia de los datos y la concordancia en el rango
-        if fech1 in df.values and fech2 in df.values and fech1 < fech2 and macap in df.values:
+        if fech1 < fech2 and macap in df.values:
             #"elimino" las categorias innecesarias
             sf2 = df.loc[: , ["Usuario","MAC AP","Inicio de Conexi¢n"]]
             #busco entre las fechas especificas
@@ -257,22 +263,26 @@ def Mac_conect_fecha():
             sf4.to_csv("users_conec_ap.csv")
         
             print("proceso realizado con exito, verificar archivo 'users_conec_ap.csv'")
-            print("Regresando al menu...")
             time.sleep(1)
-            print(".")
-            time.sleep(1)
-            print("..")
-            time.sleep(1)
-            print("...")
-            time.sleep(1)
-            main()
+            #menu para continuar
+            menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+            if menu == '1':
+                print("Regresando al menu...")
+                time.sleep(1)
+                main()
+            elif menu == '2':
+                Mac_conect_fecha()
+            elif menu == '3':
+                print("Saliendo...")
+                time.sleep(1)
+                exit
         else:
             print("Error dato, incorrecto")
             print("Volviendo al inicio")
             time.sleep(1)
             Mac_conect_fecha()
     elif selecc == '2':
-        print("nashe")
+        print("Correcto")
         #solicito la fecha y la mac ap
         print("A continuacion, ingrese la fecha especifica")
         print("El formato debe ser MM/DD/AAAA HH:MM (mes/dia/año hora:minuto)")
@@ -288,15 +298,19 @@ def Mac_conect_fecha():
             sf4.to_csv("users_conec_ap_fech.csv")
         
             print("proceso realizado con exito, verificar archivo 'users_conec_ap_fech.csv'")
-            print("Regresando al menu...")
             time.sleep(1)
-            print(".")
-            time.sleep(1)
-            print("..")
-            time.sleep(1)
-            print("...")
-            time.sleep(1)
-            main()
+            #menu para continuar
+            menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+            if menu == '1':
+                print("Regresando al menu...")
+                time.sleep(1)
+                main()
+            elif menu == '2':
+                Mac_conect_fecha()
+            elif menu == '3':
+                print("Saliendo...")
+                time.sleep(1)
+                exit
         else:
             print("Error, dato incorrecto")
             print("Volviendo al inicio")
@@ -311,10 +325,15 @@ def Mac_conect_fecha():
 
 #7
 def conex_tot():
+    #pido el usuario
     nomb_usuario = input("Ingrese el nombre de usuario a analizar: ")
+    #verifico la existencia del usuario
     if nomb_usuario in df.values:
+        #selecciono las columnas a utilizar
         sf1 = df.loc[: , ["Usuario","Input Octects","Output Octects"]]
+        #busco el usuario
         sf2 = sf1[sf1["Usuario"].isin([nomb_usuario])]
+        #sumo y divido para obtener los valores
         sf3 = sf2['Input Octects'].sum()
         MB1 = sf3 // 1048576
         sf4 = sf2['Output Octects'].sum()
@@ -323,22 +342,24 @@ def conex_tot():
         print(MB1, "MB de bajada")
         print(MB2, "MB de subida")
         time.sleep(5)
-        
-        print("Regresando al menu...")
-        
-        time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print("..")
-        time.sleep(1)
-        print("...")
-        time.sleep(1)
-        main()
+
+        #menu para continuar
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            conex_tot()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     else:
         print("error, usuario no encontrado")
-        print("regresando al menu...")
+        print("intentelo nuevamente...")
         time.sleep(1)
-        main()
+        conex_tot()
 
 
 #8
@@ -353,8 +374,20 @@ def total_traf():
         sf3 = sf2.sort_values(by = ['Input Octects'],ascending = False)
         #exporto como csv
         sf3.to_csv("sort_bajada.csv")
+        time.sleep(1)
         print("Proceso realizado con exito, verifique el archivo 'sort_bajada.csv'.")
-
+        time.sleep(1)
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            total_traf()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     elif selec == '2':
         #definimos las columnas a utilizar
         sf1 = df.loc[: , ["MAC AP","Output Octects"]]
@@ -365,6 +398,18 @@ def total_traf():
         #exporto como csv
         sf3.to_csv("sort_subida.csv")
         print("Proceso realizado con exito, verifique el archivo 'sort_subida.csv'.")
+        time.sleep(1)
+        menu = input("Para volver al menu ingrese 1, para volver a intentarlo ingrese 2, para salir 3: ")
+        if menu == '1':
+            print("Regresando al menu...")
+            time.sleep(1)
+            main()
+        elif menu == '2':
+            total_traf()
+        elif menu == '3':
+            print("Saliendo...")
+            time.sleep(1)
+            exit
     else:
         print("Intentelo de nuevo")
         total_traf()
