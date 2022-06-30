@@ -44,9 +44,6 @@ def main():
     else:
         print("error")
 
-#reemplazo los valores vacios por 0
-#df.dropna(0)
-
 #1
 def Id_ses():
     
@@ -95,7 +92,7 @@ def Inic_ses():
     #solicito la segunda fecha
     fech2 = input("ingrese la fecha final: ")
     #verifico la existencia de los datos
-    if fech1 in df.values and fech2 in df.values and nomb_usuario in df.values and fech1 < fech2:
+    if nomb_usuario in df.values and fech1 < fech2:
         #"elimino" las categorias innecesarias
         sf2 = df.loc[: , ["Usuario","Inicio de Conexi¢n"]]
         #busco el nombre del usuario
@@ -244,7 +241,7 @@ def Mac_conect_fecha():
     selecc = input("Ingrese 1 si desea en rango, ingrese 2 si desea en fecha determinada: ")
     if selecc == '1':
         print("A continuacion, ingrese el rango de fecha")
-        print("El formato debe ser MM/DD/AAAA HH:MM (mes/dia/año hora:minuto)")
+        print("El formato debe ser MM/DD/AAAA (mes/dia/año), puede incluir hora HH:MM (hora:minuto")
         time.sleep(2)
         #solicito la primer fecha
         fech1 = input("ingrese la fecha inicial: ")
@@ -285,15 +282,19 @@ def Mac_conect_fecha():
         print("Correcto")
         #solicito la fecha y la mac ap
         print("A continuacion, ingrese la fecha especifica")
-        print("El formato debe ser MM/DD/AAAA HH:MM (mes/dia/año hora:minuto)")
+        print("El formato debe ser MM/DD/AAAA (mes/dia/año)")
         time.sleep(2)
-        fechespec = input("Ingrese la fecha y hora: ")
+        #pido la fecha
+        fechespec = input("Ingrese la fecha: ")
+        #creo la fecha final que es el mismo dia hasta las 23:59
+        fechespecfin = fechespec + ' 23:59'
+        #pido la mac
         macap2 = input("Ingrese la mac ap a analizar: ")
-        if macap2 in df.values and fechespec in df.values:
+        if macap2 in df.values:
             sf2 = df.loc[: , ["Usuario","MAC AP","Inicio de Conexi¢n"]]
             #busco entre las fechas especificas
             sf3 = sf2[sf2["MAC AP"].isin([macap2])]
-            sf4 = sf3.loc[df["Inicio de Conexi¢n"].isin([fechespec])]
+            sf4 = sf3.loc[df["Inicio de Conexi¢n"].between(fechespec, fechespecfin)]
             #exporto csv
             sf4.to_csv("users_conec_ap_fech.csv")
         
