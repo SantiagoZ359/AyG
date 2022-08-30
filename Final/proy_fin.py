@@ -418,7 +418,10 @@ def total_traf():
 #8/28/2019 10:06
 #8/28/2019 10:07
 #csegeview
+#mac ap:
 #04-18-D6-22-94-E7:UM
+#mac cliente:
+#48-C7-96-EE-75-1C
 
 if __name__ == '__main__':
     main()
